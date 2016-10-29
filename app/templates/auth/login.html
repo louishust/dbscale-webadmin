@@ -1,0 +1,39 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}DBScale Web Admin - Login{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='signin.css') }}">
+{% endblock head %}
+
+{% block body %}
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+
+<div class="container">
+  <form class="form-signin" method="POST">
+    {{ form.hidden_tag() }}
+    <h2 class="form-signin-heading">DBScale管理平台登录</h2>
+    <label for="inputEmail" class="sr-only">Username</label>
+    {{ form.username(class="form-control", placeholder="User name") }}
+    <label for="inputPassword" class="sr-only">Password</label>
+    {{ form.password(class="form-control", placeholder="Password") }}
+    {{ form.remember_me() }}  <label>Remember me</label>
+    {{ form.submit(class="btn btn-lg btn-primary btn-block")}}
+  </form>
+</div>
+
+{% endblock %}
+
+
+
+{% endblock %}
