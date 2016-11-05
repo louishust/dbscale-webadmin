@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+
+{% block head %}
+{{ super() }}
+<script>
+  $(document).ready(function(){
+      $('#add_success').hide();
+      $("#coll1").addClass("active");
+      $('#add').on("submit", function() {
+        add_cluster($('form').serialize() , function(data) {});
+        $('#add_success').show();
+        });
+      });
+</script>
+{% endblock head %}
+
+{% block tab %}
+<div id="body" class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
+
+<form id="add">
+  <div class="form-group">
+    <label for="cluster_name">集群名称</label>
+    <input type="text" name="name" class="form-control" id="cluster_name" placeholder="Cluster Name" required>
+  </div>
+  <div class="form-group">
+    <label for="cluster_ip">DBScale主机IP</label>
+    <input type="text" name="ip" class="form-control" id="cluster_ip" placeholder="DBScale IP" required>
+  </div>
+  <div class="form-group">
+    <label for="cluster_port">DBScale主机端口</label>
+    <input type="text" name="port" class="form-control" id="cluster_port" placeholder="DBScale Port" required>
+  </div>
+  <div class="form-group">
+    <label for="cluster_port">DBScale用户名</label>
+    <input type="text" name="username" class="form-control" id="cluster_username" placeholder="DBScale Username" required>
+  </div>
+  <div class="form-group">
+    <label for="cluster_port">DBScale密码</label>
+    <input type="password" name="password" class="form-control" id="cluster_username" placeholder="DBScale Password" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div id='add_success' class="alert alert-success">
+  <strong>Success!</strong>
+</div>
+</div>
+
+{% endblock tab%}

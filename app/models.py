@@ -20,6 +20,16 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+class Cluster(db.Model):
+    __tablename__ = 'clusters'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=True, index=True, doc="Cluster name")
+    ip = db.Column(db.String(64))
+    port = db.Column(db.Integer)
+    username = db.Column(db.String(64))
+    password = db.Column(db.String(64))
+    comment = db.Column(db.String(64))
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))

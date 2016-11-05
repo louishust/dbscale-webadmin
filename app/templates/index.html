@@ -5,6 +5,29 @@
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='app.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome.css') }}">
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='ace.js') }}"></script>
+<script src="{{ url_for('static', filename='ace-pgsql.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap-contextmenu.js') }}"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+<script>
+  $(document).ready(function(){
+      $("li").click(function() {
+        $("li").removeClass("active");
+        $(this).addClass("active");
+        });
+      $("#sql").click(function() {
+        window.location.href="sql";
+        });
+      $("#add_cluster").click(function() {
+        window.location.href="add_cluster";
+        });
+      });
+</script>
+
 {% endblock %}
 
 {% block body %}
@@ -37,15 +60,25 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Analytics</a></li>
-        <li><a href="#">Export</a></li>
+        <li id="coll1"><a data-toggle="collapse" href="#collapse1">集群管理<span class="sr-only">(current)</span></a></li>
+        <div id="collapse1" class="panel-collapse collapse">
+          <ul class="list-group">
+            <li id="add_cluster"class="list-group-item">&nbsp;&nbsp;&nbsp;新增集群</li>
+            <li class="list-group-item">&nbsp;&nbsp;&nbsp;查看集群</li>
+          </ul>
+        </div>
+        <li id="sql"><a href="#">SQL命令台</a></li>
+        <li id="coll2"><a data-toggle="collapse" href="#collapse2">集群监控</a></li>
+        <div id="collapse2" class="panel-collapse collapse">
+          <ul class="list-group">
+            <li class="list-group-item">&nbsp;&nbsp;&nbsp;集群拓扑</li>
+            <li class="list-group-item">&nbsp;&nbsp;&nbsp;慢日志</li>
+            <li class="list-group-item">&nbsp;&nbsp;&nbsp;错误日志</li>
+          </ul>
+        </div>
       </ul>
     </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header">Dashboard</h1>
-    </div>
+    {% block tab %} {% endblock tab %}
   </div>
 </div>
 {% endblock body %}
