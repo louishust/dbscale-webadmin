@@ -6,9 +6,11 @@
   $(document).ready(function(){
       $('#add_success').hide();
       $("#coll1").addClass("active");
-      $('#add').on("submit", function() {
-        add_cluster($('form').serialize() , function(data) {});
-        $('#add_success').show();
+      $('#submit').on("click", function() {
+        add_cluster($('form').serialize() , function(data) {
+          $('#add_success').show();
+          console.log(data);
+          });
         });
       });
 </script>
@@ -38,7 +40,7 @@
     <label for="cluster_port">DBScale密码</label>
     <input type="password" name="password" class="form-control" id="cluster_username" placeholder="DBScale Password" required>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button id='submit' type="button" class="btn btn-primary">Submit</button>
 </form>
 <div id='add_success' class="alert alert-success">
   <strong>Success!</strong>

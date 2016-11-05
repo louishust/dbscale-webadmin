@@ -1,4 +1,4 @@
-from flask import render_template, jsonify, request, abort
+from flask import render_template, request, abort, json
 from flask_login import login_required
 from . import api
 from ..models import Cluster
@@ -15,9 +15,4 @@ def add_cluster():
     cluster.password = request.form['password']
 
     db.session.add(cluster)
-    return jsonify({'ret': 0}), 201
-
-
-@api.route('/test', methods=['GET'])
-def test():
-    return 'Hello, World!'
+    return json.dumps({'status':'OK'})
