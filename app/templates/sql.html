@@ -15,10 +15,9 @@
   <div id="select-ds">
     <select class="form-control">
       <option value="">选择集群</option>
-      <option value="like">LIKE</option>
-      <option value="ilike">ILIKE</option>
-      <option value="null">IS NULL</option>
-      <option value="not_null">NOT NULL</option>
+      {% for cluster in clusters %}
+      <option value="{{cluster.id}}">{{cluster.name}}</option>
+      {% endfor %}
     </select>
   </div>
   <div id="input">
