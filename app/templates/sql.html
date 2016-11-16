@@ -2,34 +2,35 @@
 
 {% block head %}
 {{ super() }}
-<script>
-  $(document).ready(function(){
-      $("#sql").addClass("active");
-      });
-</script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sql.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-select.min.css') }}">
+<script src="{{ url_for('static', filename='ace.js') }}"></script>
+<script src="{{ url_for('static', filename='mode-mysql.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap-select.min.js') }}"></script>
+<script src="{{ url_for('static', filename='sql.js') }}"></script>
 {% endblock head %}
 
 {% block tab %}
-
 <div id="body" >
-  <div id="select-ds">
-    <select class="form-control">
+  <div>
+    <select id="cluster_id" class="selectpicker">
       <option value="">选择集群</option>
       {% for cluster in clusters %}
       <option value="{{cluster.id}}">{{cluster.name}}</option>
       {% endfor %}
     </select>
   </div>
+
   <div id="input">
     <div class="wrapper">
-          <div id="custom_query"></div>
+      <div id="custom_query"></div>
       <div class="actions">
         <input type="button" id="run" value="Run Query" class="btn btn-sm btn-primary" />
-        <input type="button" id="explain" value="Explain Query" class="btn btn-sm btn-default" />
         <div id="query_progress">Please wait, query is executing...</div>
       </div>
     </div>
   </div>
+
   <div id="output">
     <div class="wrapper">
       <table id="results" class="table"></table>
@@ -37,4 +38,3 @@
   </div>
 </div>
 {% endblock tab %}
-

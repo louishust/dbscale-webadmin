@@ -103,3 +103,12 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+#body {
+  position: fixed;
+  top: 50px;
+  left: 250px;
+  bottom: 0px;
+  right: 0px;
+  overflow: auto;
+}

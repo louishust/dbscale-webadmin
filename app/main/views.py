@@ -8,7 +8,6 @@ from ..models import Cluster
 def index():
     return render_template('index.html')
 
-
 @main.route('/sql', methods=['GET'])
 @login_required
 def sql():

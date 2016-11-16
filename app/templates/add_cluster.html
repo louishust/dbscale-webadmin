@@ -2,18 +2,7 @@
 
 {% block head %}
 {{ super() }}
-<script>
-  $(document).ready(function(){
-      $('#add_success').hide();
-      $("#coll1").addClass("active");
-      $('#submit').on("click", function() {
-        add_cluster($('form').serialize() , function(data) {
-          $('#add_success').show();
-          console.log(data);
-          });
-        });
-      });
-</script>
+<script src="{{ url_for('static', filename='add_cluster.js') }}"></script>
 {% endblock head %}
 
 {% block tab %}
