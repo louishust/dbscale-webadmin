@@ -31,6 +31,7 @@ def query():
         cur.close()
         conn.close()
     except Exception as e:
+        print str(e)
         return json.dumps({'error':str(e)})
 
     listcols = []
@@ -38,3 +39,10 @@ def query():
         listcols.append(col[0])
 
     return json.dumps({'status':'OK', 'columns':listcols, 'rows':list(rows)})
+
+@api.route('/get_dbscale', methods=['POST'])
+def get_dbscale():
+    cid = request.form['id']
+    cluster = Cluster.query.filter_by(id=cid).first()
+    ret = cluster.ip + ":" + str(cluster.port)
+    return json.dumps({'dbscale': ret})

@@ -12,5 +12,8 @@ $(document).ready(function(){
   $("#show_cluster").click(function() {
     window.location.href="show_cluster";
   });
+  $("#show_topo").click(function() {
+    window.location.href="topo";
+  });
 });
 

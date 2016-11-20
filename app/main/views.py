@@ -24,3 +24,9 @@ def add_cluster():
 def show_cluster():
     clusters = Cluster.query
     return render_template('show_cluster.html', clusters=clusters)
+
+@main.route('/topo', methods=['GET'])
+@login_required
+def topo():
+    clusters = Cluster.query
+    return render_template('topo.html', clusters=clusters)

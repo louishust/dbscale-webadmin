@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='topo.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-select.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vis.min.css') }}">
+<script src="{{ url_for('static', filename='bootstrap-select.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vis.min.js') }}"></script>
+<script src="{{ url_for('static', filename='topo.js') }}"></script>
+{% endblock head %}
+
+{% block tab %}
+<div id="body" >
+  <div>
+    <select id="cluster_id" class="selectpicker">
+      <option value="">选择集群</option>
+      {% for cluster in clusters %}
+      <option value="{{cluster.id}}">{{cluster.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div id="mynetwork"></div>
+</div>
+</div>
+{% endblock tab %}
