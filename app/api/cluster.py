@@ -23,7 +23,7 @@ def query():
     cid = request.form['id']
     cluster = Cluster.query.filter_by(id=cid).first()
     try:
-        conn = MySQLdb.connect(user=cluster.username, passwd=cluster.password, host=cluster.ip, port=cluster.port, charset='utf8')
+        conn = MySQLdb.connect(user=cluster.username, passwd=cluster.password, host=cluster.ip, port=cluster.port, charset='utf8', connect_timeout=1)
         cur = conn.cursor()
         cur.execute(query)
         columns = cur.description
@@ -44,5 +44,5 @@ def query():
 def get_dbscale():
     cid = request.form['id']
     cluster = Cluster.query.filter_by(id=cid).first()
-    ret = cluster.ip + ":" + str(cluster.port)
+    ret = {'name': cluster.name, 'ip': cluster.ip, 'port': cluster.port}
     return json.dumps({'dbscale': ret})

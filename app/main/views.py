@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request
 from flask_login import login_required
 from . import main
 from ..models import Cluster
@@ -30,3 +30,10 @@ def show_cluster():
 def topo():
     clusters = Cluster.query
     return render_template('topo.html', clusters=clusters)
+
+@main.route('/dbscale_info', methods=['POST'])
+@login_required
+def dbscale_info():
+    cid = request.form['id']
+    cluster = Cluster.query.filter_by(id=cid).first()
+    return render_template('dbscale_info.html', cluster=cluster)

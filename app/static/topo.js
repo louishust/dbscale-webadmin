@@ -31,18 +31,19 @@ var reps = new Array();
 var servernamedict = {};
 var network = null;
 var serveriddict = {};
+var dbscale_ok = 1;
 
 function executeQuery(query, id, cb) {
   apiCallS("post", "/query", { query: query, id: id }, cb);
 }
 
 function getDBScale(id) {
-  var s;
+  var dbscale;
   apiCallS("post", "/get_dbscale", { id: id }, function(data) {
-    s =  data.dbscale;
+    dbscale =  data.dbscale;
   });
 
-  return "DBScale\n" + s;
+  return "DBScale\n" + dbscale.ip + ":" + dbscale.port;
 }
 
 
@@ -50,6 +51,7 @@ function get_servers(id) {
   var query = 'DBSCALE SHOW DATASERVERS;';
   executeQuery(query, id, function(results) {
     if (results.error) {
+      dbscale_ok = 0;
       return;
     }
     results.rows.forEach(function(row) {
@@ -70,6 +72,7 @@ function get_rep_datasource(id) {
   var query = "DBSCALE SHOW DATASOURCE TYPE = replication;";
   executeQuery(query, id, function(results) {
     if (results.error) {
+      dbscale_ok = 0;
       return;
     }
     results.rows.forEach(function(row) {
@@ -100,7 +103,11 @@ function show_topo() {
 
   dbscale.id = id;
   dbscale.label = getDBScale(cluster_id);
-  dbscale.group = 'nodeok';
+  if (dbscale_ok == 0) {
+    dbscale.group = 'nodeerr';
+  } else {
+    dbscale.group = 'nodeok';
+  }
   mnodes.push(dbscale);
   var server = {'name' : 'dbscale'};
   serveriddict[id] = server;
@@ -137,8 +144,20 @@ function show_topo() {
   var data = {nodes: vnodes,edges: vedges};
   var container = document.getElementById('mynetwork');
   network = new vis.Network(container, data, options);
+
   network.on("selectNode", function (params) {
-    console.log(serveriddict[params.nodes[0]].name);
+    if (params.nodes[0] == 1) {
+      var id = $("#cluster_id").val();
+      BootstrapDialog.show({
+        message: $('<div class="table-responsive"></div>').load('dbscale_info', {id: id})
+      });
+    } else {
+      var server = serveriddict[params.nodes[0]];
+       BootstrapDialog.show({
+        message: server.name
+      });
+    }
+    network.unselectAll();
   });
 }
 

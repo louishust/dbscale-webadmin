@@ -2,11 +2,13 @@
 
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='topo.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-select.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vis.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-dialog.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='topo.css') }}">
 <script src="{{ url_for('static', filename='bootstrap-select.min.js') }}"></script>
 <script src="{{ url_for('static', filename='vis.min.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap-dialog.min.js') }}"></script>
 <script src="{{ url_for('static', filename='topo.js') }}"></script>
 {% endblock head %}
 
@@ -22,6 +24,24 @@
   </div>
 
   <div id="mynetwork"></div>
-</div>
+
+  <!-- Modal -->
+  <div class="modal bs-example-modal-sm fade" tabindex="-1" id="myModal" role="dialog" aria-labelledby="mySmallModalLabel">
+    <!-- Modal content-->
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"></button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock tab %}

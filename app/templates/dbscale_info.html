@@ -1,0 +1,18 @@
+{% extends "bootstrap/base.html" %}
+
+{% block body %}
+<table class="table table-striped table-hovertable-bordered">
+  <tr>
+    <td>集群名称</td>
+    <td>{{cluster.name}}</td>
+  </tr>
+  <tr>
+    <td>集群IP</td>
+    <td>{{cluster.ip}}</td>
+  </tr>
+  <tr>
+    <td>集群端口</td>
+    <td>{{cluster.port}}</td>
+  </tr>
+  <table>
+{% endblock %}

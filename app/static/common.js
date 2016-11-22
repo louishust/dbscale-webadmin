@@ -22,7 +22,7 @@ function apiCall(method, path, params, cb) {
 
 
 function apiCallS(method, path, params, cb) {
-  var timeout = 300000; // 5 mins is enough
+  var timeout = 500; // 5 mins is enough
 
   $.ajax({
     timeout: timeout,
