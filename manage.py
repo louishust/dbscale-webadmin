@@ -28,6 +28,7 @@ def deploy():
     user_admin = User(username='admin');
     user_admin.password = 'admin'
     db.session.add(user_admin)
+    db.session.commit()
 
 if __name__ == '__main__':
     manager.run()

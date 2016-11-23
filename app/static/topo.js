@@ -161,7 +161,9 @@ function show_topo() {
   });
 }
 
+
 $(document).ready(function() {
+  $('.selectpicker').selectpicker({});
   $("#cluster_id").on("change", function() {
     if (network != null) {
       network.destroy();

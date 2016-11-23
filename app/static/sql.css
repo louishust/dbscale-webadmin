@@ -1,15 +1,10 @@
-#body {
-  position: fixed;
-  top: 50px;
-  left: 250px;
-  bottom: 0px;
-  right: 0px;
-  overflow: auto;
+#cluster_id {
+  height: 90px;
 }
 
 #custom_query {
   height: 193px;
-  margin-top: 12px;
+  margin-top: 13px;
 }
 
 #input {
@@ -82,17 +77,6 @@
 
 #input .actions .btn:last-child {
   margin-right: 0px;
-}
-
-#output {
-  position: absolute;
-  left: 0px;
-  top: 288px;
-  bottom: 0px;
-  right: 0px;
-  margin: 0px;
-  padding: 0px;
-  overflow: auto;
 }
 
 #results {
@@ -188,3 +172,5 @@
 .full #output {
   top: 0px !important;
 }
+
+

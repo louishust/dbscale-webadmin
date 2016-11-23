@@ -7,14 +7,29 @@ import MySQLdb
 
 @api.route('/add_cluster', methods=['POST'])
 def add_cluster():
-    cluster = Cluster()
-    cluster.name = request.form['name']
-    cluster.ip = request.form['ip']
-    cluster.port = request.form['port']
-    cluster.username = request.form['username']
-    cluster.password = request.form['password']
+    try:
+        cluster = Cluster()
+        cluster.name = request.form['name']
+        cluster.ip = request.form['ip']
+        cluster.port = request.form['port']
+        cluster.username = request.form['username']
+        cluster.password = request.form['password']
+        db.session.add(cluster)
+        db.session.commit()
+    except Exception as e:
+        print 'aaaaaa'
+        print str(e)
+        print 'bbbbb'
+        return json.dumps({'error':str(e)})
+    return json.dumps({'status':'OK'})
 
-    db.session.add(cluster)
+
+@api.route('/del_cluster', methods=['POST'])
+def del_cluster():
+    cid = request.form['id']
+    cluster = Cluster.query.filter_by(id=cid).first()
+    db.session.delete(cluster)
+    db.session.commit()
     return json.dumps({'status':'OK'})
 
 @api.route('/query', methods=['POST'])

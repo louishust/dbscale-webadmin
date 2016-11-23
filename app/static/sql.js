@@ -91,7 +91,7 @@ function runQuery() {
 }
 
 $(document).ready(function() {
-  $("#sql").addClass("active");
+  $('.selectpicker').selectpicker({});
   initEditor();
   $("#run").on("click", function() {
     runQuery();

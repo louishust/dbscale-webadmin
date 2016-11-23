@@ -1,7 +1,3 @@
-{% extends "index.html" %}
-
-{% block head %}
-{{ super() }}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-select.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vis.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-dialog.min.css') }}">
@@ -10,11 +6,8 @@
 <script src="{{ url_for('static', filename='vis.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bootstrap-dialog.min.js') }}"></script>
 <script src="{{ url_for('static', filename='topo.js') }}"></script>
-{% endblock head %}
-
-{% block tab %}
-<div id="body" >
-  <div>
+<div class="container-fluid">
+  <div class="row">
     <select id="cluster_id" class="selectpicker">
       <option value="">选择集群</option>
       {% for cluster in clusters %}
@@ -23,7 +16,7 @@
     </select>
   </div>
 
-  <div id="mynetwork"></div>
+  <div id="mynetwork" class="row"></div>
 
   <!-- Modal -->
   <div class="modal bs-example-modal-sm fade" tabindex="-1" id="myModal" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -44,4 +37,3 @@
     </div>
   </div>
 </div>
-{% endblock tab %}

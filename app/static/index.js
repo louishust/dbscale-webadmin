@@ -1,19 +1,23 @@
 $(document).ready(function(){
   $("li").click(function() {
+  });
+  $("#sql").click(function() {
+    $("#tab").load('sql');
+  });
+  $("#add_cluster").click(function() {
+    $("#tab").load('add_cluster');
     $("li").removeClass("active");
     $(this).addClass("active");
   });
-  $("#sql").click(function() {
-    window.location.href="sql";
-  });
-  $("#add_cluster").click(function() {
-    window.location.href="add_cluster";
-  });
   $("#show_cluster").click(function() {
-    window.location.href="show_cluster";
+    $("#tab").load('show_cluster');
+    $("li").removeClass("active");
+    $(this).addClass("active");
   });
   $("#show_topo").click(function() {
-    window.location.href="topo";
+    $("#tab").load('topo');
+    $("li").removeClass("active");
+    $(this).addClass("active");
   });
 });
 

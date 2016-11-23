@@ -1,53 +1,27 @@
-{% extends "bootstrap/base.html" %}
-
-{% block title %}test{% endblock %}
-
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='app.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap-select.min.css') }}">
-<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
-<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
-<script src="{{ url_for('static', filename='bootstrap-contextmenu.js') }}"></script>
-<script src="{{ url_for('static', filename='ace.js') }}"></script>
-<script src="{{ url_for('static', filename='mode-mysql.js') }}"></script>
-<script src="{{ url_for('static', filename='sql.js') }}"></script>
-<script src="{{ url_for('static', filename='bootstrap-select.min.js') }}"></script>
-{% endblock %}
-
-
-{% block body %}
-
-<div id="body">
-<div>
-  <select id="cluster_id" class="selectpicker">
-    <option value="">选择集群</option>
-    {% for cluster in clusters %}
-    <option value="{{cluster.id}}">{{cluster.name}}</option>
-    {% endfor %}
-  </select>
-</div>
-
-
-  <div id="input">
-    <div class="wrapper">
-      <div id="custom_query"></div>
-      <div class="actions">
-        <input type="button" id="run" value="Run Query" class="btn btn-sm btn-primary" />
-        <div id="query_progress">Please wait, query is executing...</div>
-      </div>
-    </div>
+<form id="add">
+  <div class="form-group">
+    <label for="cluster_name">集群名称</label>
+    <input type="text" name="name" class="form-control" id="cluster_name" placeholder="Cluster Name" required>
   </div>
-  <div id="output">
-    <div class="wrapper">
-      <table id="results" class="table"></table>
-    </div>
+  <div class="form-group">
+    <label for="cluster_ip">DBScale主机IP</label>
+    <input type="text" name="ip" class="form-control" id="cluster_ip" placeholder="DBScale IP" required>
   </div>
-
+  <div class="form-group">
+    <label for="cluster_port">DBScale主机端口</label>
+    <input type="text" name="port" class="form-control" id="cluster_port" placeholder="DBScale Port" required>
+  </div>
+  <div class="form-group">
+    <label for="cluster_port">DBScale用户名</label>
+    <input type="text" name="username" class="form-control" id="cluster_username" placeholder="DBScale Username" required>
+  </div>
+  <div class="form-group">
+    <label for="cluster_port">DBScale密码</label>
+    <input type="password" name="password" class="form-control" id="cluster_username" placeholder="DBScale Password" required>
+  </div>
+  <button id='submit' type="button" class="btn btn-primary">Submit</button>
 </div>
-
-
-{% endblock body %}
-
+</form>
+<div id='add_success' class="alert alert-success">
+  <strong>Success!</strong>
+</div>
